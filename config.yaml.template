@@ -1,0 +1,22 @@
+# --- LLM Configuration for Data Generation ---
+# Options: google, openai, ollama
+llm_provider: "google"
+llm_api_key: "your-api-key-here"
+# Custom endpoint below if needed for openai or ollama (e.g., http://localhost:11434/v1)
+llm_api_url: null
+llm_model_name: "gemini-1.5-pro"
+llm_temperature: 0.7
+# Number of synthetic sentence pairs to generate
+llm_num_pairs: 50
+llm_batch_size: 20
+
+# --- Embedding Model Configuration ---
+embedding_api_url: "http://10.68.7.107:8079"
+embedding_model_id: "nomic-ai/nomic-embed-text-v1.5"
+
+
+# --- Pipeline Behavior Configuration ---
+pipeline_run_validation_by_default: false
+pipeline_num_validation_samples: 20
+# Optionally, provide a path to a specific JSON file of pairs to use for in-sample validation, instead of the pairs generated in the run.
+pipeline_validation_pairs_override_path: null

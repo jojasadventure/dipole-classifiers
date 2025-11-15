@@ -1,0 +1,44 @@
+# V4: A longer, more detailed prompt for the "Confidence: Tentative vs. Confident" dimension.
+# This prompt provides more examples, variety, and explicit anti-examples.
+
+Generate exactly {num_pairs} unique pairs of sentences. Each pair should consist of:
+1. A sentence representing the '{pole_a}' pole of the '{dimension_name}' dimension.
+2. A sentence representing the '{pole_b}' pole of the '{dimension_name}' dimension.
+
+Both sentences in a pair should be about the same core topic or situation, differing primarily along the '{dimension_name}' dimension ({pole_a} vs. {pole_b}).
+
+The Tentative sentence should express uncertainty, possibility, or use hedging language (e.g., "might," "could," "suggests," "seems," "I think"). The Confident sentence should express certainty, directness, and conviction, often stating something as a fact or a strong belief.
+
+Format the output strictly as a JSON list of objects. Each object in the list must have exactly two keys: "{pole_a_key}" and "{pole_b_key}".
+
+--- Examples of Good Contrastive Pairs for this Dimension ---
+
+1. Business Analysis
+- Tentative: "The data suggests a possible decline in user engagement this quarter."
+  Confident: "The data shows a clear decline in user engagement this quarter."
+
+2. Personal Opinion
+- Tentative: "I feel like this might be the most effective way to solve the problem."
+  Confident: "I know this is the most effective way to solve the problem."
+
+3. Physical Action / Behavior (The Blind Spot)
+- Tentative: "He approached the task hesitantly, as if unsure where to begin."
+  Confident: "He tackled the task with authority, demonstrating complete control."
+
+4. Scientific Language
+- Tentative: "These findings suggest that the two variables may be linked."
+  Confident: "These findings prove that one variable is directly caused by the other."
+
+5. Future Prediction
+- Tentative: "It's possible we'll see a market correction in the next six months."
+  Confident: "We will definitely see a market correction in the next six months."
+
+--- What to AVOID: Do NOT confuse Politeness with Tentativeness ---
+
+This is a bad example because it confuses politeness with the core dimension of confidence. Both sentences are confident requests.
+- Incorrect: "Could you please send me the report when you have a moment?" (This is polite, not tentative)
+- Incorrect: "Send me the report now." (This is direct/impolite, not necessarily more confident)
+
+--- End Examples ---
+
+Begin the JSON output now for the '{dimension_name}: {pole_a} vs {pole_b}' dimension:

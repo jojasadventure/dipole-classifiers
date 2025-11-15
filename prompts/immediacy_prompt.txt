@@ -1,0 +1,34 @@
+# V2: Correcting the ambiguous "Direct" with "Concrete"
+# Custom prompt for the "Immediacy: Concrete vs. Abstract" dimension.
+
+Generate exactly {num_pairs} unique pairs of sentences. Each pair should consist of:
+1. A sentence representing the '{pole_a}' pole of the '{dimension_name}' dimension.
+2. A sentence representing the '{pole_b}' pole of the '{dimension_name}' dimension.
+
+Both sentences in a pair should be about the same core topic or situation, differing primarily along the '{dimension_name}' dimension ({pole_a} vs. {pole_b}).
+
+The Concrete sentence should use sensory language to describe a specific, tangible action or object. The Abstract sentence should describe the same situation using high-level concepts or general principles.
+
+Format the output strictly as a JSON list of objects. Each object in the list must have exactly two keys: "{pole_a_key}" and "{pole_b_key}".
+
+--- Examples of Good Contrastive Pairs for this Dimension ---
+
+1. Company Performance
+- Concrete: "The company sold 50,000 blue widgets and opened three new stores last quarter."
+  Abstract: "The company demonstrated significant growth and market expansion last quarter."
+
+2. Employee Feedback
+- Concrete: "John arrives at 8:55 AM every day and completes all his reports before the deadline."
+  Abstract: "John exhibits a high degree of punctuality and reliability in his work."
+
+3. Product Description
+- Concrete: "The knife's steel blade cuts through a tomato without crushing it."
+  Abstract: "The knife's superior design ensures optimal performance and precision."
+
+4. Historical Event
+- Concrete: "The protestors threw rocks and chanted slogans in the town square."
+  Abstract: "The event was characterized by significant civil unrest and political expression."
+
+--- End Examples ---
+
+Begin the JSON output now for the '{dimension_name}: {pole_a} vs {pole_b}' dimension:

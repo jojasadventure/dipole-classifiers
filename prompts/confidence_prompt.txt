@@ -1,0 +1,34 @@
+# Custom prompt for the "Confidence: Tentative vs. Confident" dimension.
+# V1: The original "happy accident" prompt with high consistency.
+
+Generate exactly {num_pairs} unique pairs of sentences. Each pair should consist of:
+1. A sentence representing the '{pole_a}' pole of the '{dimension_name}' dimension.
+2. A sentence representing the '{pole_b}' pole of the '{dimension_name}' dimension.
+
+Both sentences in a pair should be about the same core topic or situation, differing primarily along the '{dimension_name}' dimension ({pole_a} vs. {pole_b}). The topics should cover a range of professional and personal situations. Keep sentences relatively concise (approx. 10-30 words).
+
+The Tentative sentence should express uncertainty, possibility, or use hedging language. The Confident sentence should express certainty, directness, and conviction, often stating something as a fact.
+
+Format the output strictly as a JSON list of objects. Each object in the list must have exactly two keys: "{pole_a_key}" and "{pole_b_key}".
+
+--- Examples of Good Contrastive Pairs for this Dimension ---
+
+1. Business Analysis
+- Tentative: "The data suggests a possible decline in user engagement this quarter."
+  Confident: "The data shows a clear decline in user engagement this quarter."
+
+2. Team Decision
+- Tentative: "I think this new software might be the best option for our team."
+  Confident: "This new software is the best option for our team."
+
+3. Project Planning
+- Tentative: "Completing the project by the Friday deadline could be challenging."
+  Confident: "We will not complete the project by the Friday deadline."
+
+4. Scientific Claim
+- Tentative: "The initial results appear to support the main hypothesis."
+  Confident: "The initial results prove the main hypothesis."
+
+--- End Examples ---
+
+Begin the JSON output now for the '{dimension_name}: {pole_a} vs {pole_b}' dimension:

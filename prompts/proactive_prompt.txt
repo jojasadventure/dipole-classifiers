@@ -1,0 +1,37 @@
+# Custom prompt for the "Agency: Reactive vs. Proactive" dimension.
+# This prompt uses tailored examples to get higher quality pairs.
+
+Generate exactly {num_pairs} unique pairs of sentences. Each pair should consist of:
+1. A sentence representing the '{pole_a}' pole of the '{dimension_name}' dimension.
+2. A sentence representing the '{pole_b}' pole of the '{dimension_name}' dimension.
+
+Both sentences in a pair should be about the same core topic or situation, differing primarily along the '{dimension_name}' dimension ({pole_a} vs. {pole_b}). The topics should cover a range of professional and personal situations. Keep sentences relatively concise (approx. 10-30 words).
+
+The Reactive sentence should describe an action taken in response to a past or current event. The Proactive sentence should describe an action taken to prepare for or influence a future event.
+
+Format the output strictly as a JSON list of objects. Each object in the list must have exactly two keys: "{pole_a_key}" and "{pole_b_key}".
+
+--- Examples of Good Contrastive Pairs for this Dimension ---
+
+1. Project Management
+- Reactive: "We fixed the bug after customers reported the system was crashing."
+  Proactive: "We added automated unit tests to catch potential bugs before the next release."
+
+2. Customer Support
+- Reactive: "The team created a document to answer the frequently asked questions we received this week."
+  Proactive: "The team is developing a tutorial series to guide new users through the initial setup."
+
+3. Financial Planning
+- Reactive: "He started saving money after getting a large, unexpected bill."
+  Proactive: "He contributes to an emergency fund every month to prepare for unexpected expenses."
+
+4. Health
+- Reactive: "She changed her diet because the doctor warned her about high cholesterol."
+  Proactive: "She maintains a balanced diet and exercises regularly to prevent future health issues."
+
+5. Event Planning
+- Reactive: "We ordered more chairs after realizing we didn't have enough for the attendees who arrived."
+  Proactive: "Anticipating a large turnout, we reserved a venue with flexible seating options."
+--- End Examples ---
+
+Begin the JSON output now for the '{dimension_name}: {pole_a} vs {pole_b}' dimension:

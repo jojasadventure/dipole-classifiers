@@ -1,0 +1,57 @@
+# --- PROMPT TEMPLATE ---
+# This file is a template for generating contrastive pairs.
+# The pipeline will replace the following placeholders:
+#
+# {num_pairs}         - The number of pairs to request in this API call.
+# {dimension_name}    - The name of the dimension (e.g., "Formality").
+# {pole_a}            - The name of the first pole (e.g., "Formal").
+# {pole_b}            - The name of the second pole (e.g., "Informal").
+# {pole_a_key}        - The JSON key for the first pole (e.g., "formal").
+# {pole_b_key}        - The JSON key for the second pole (e.g., "informal").
+# {extra_instructions}- Optional text provided via the --prompt-extra-text CLI argument.
+# -------------------------
+
+Generate exactly {num_pairs} unique pairs of sentences. Each pair should consist of:
+1. A sentence representing the '{pole_a}' pole of the '{dimension_name}' dimension.
+2. A sentence representing the '{pole_b}' pole of the '{dimension_name}' dimension.
+
+Both sentences in a pair should be about the same core topic or situation, differing primarily along the '{dimension_name}' dimension ({pole_a} vs. {pole_b}). The topics should be varied (e.g., work projects, social interactions, product reviews, food experiences, general observations). Keep sentences relatively concise (approx. 10-30 words).
+
+{extra_instructions}
+
+Format the output strictly as a JSON list of objects. Each object in the list must have exactly two keys: "{pole_a_key}" and "{pole_b_key}".
+
+--- Examples of Good Contrastive Pairs ---
+
+Key Principles:
+1. **Minimal semantic drift**: Same core info, differ only on target dimension.
+2. **Precision in opposition**: Clear opposites on the dimension.
+3. **Content consistency**: No significant extra info in either pair.
+
+1. Formality-Casualness (formal vs. casual)
+- Formal: "The meeting has been rescheduled to accommodate the participants' schedules."
+  Casual: "We moved the meeting because everyone's schedules were messy."
+- Formal: "Please proceed with the implementation as discussed."
+  Casual: "Go ahead and do what we talked about."
+- Formal: "Your assistance in this matter would be greatly appreciated."
+  Casual: "I'd really appreciate your help with this."
+
+2. Simple-Complex (simple vs. complex)
+- Simple: "The drug reduces inflammation in joints."
+  Complex: "The pharmaceutical agent inhibits inflammatory cytokine production within synovial articulations."
+- Simple: "Plants convert sunlight to energy."
+  Complex: "Photosynthetic organisms transform solar radiation into chemical energy via electron transport chains."
+- Simple: "Better education leads to higher earnings."
+  Complex: "Enhanced educational attainment correlates with increased income potential."
+
+3. Objective-Subjective (objective vs. subjective)
+- Objective: "The painting uses blue and yellow colors throughout."
+  Subjective: "The painting uses beautiful and vibrant colors throughout."
+- Objective: "The film was released in 2022 and ran for 136 minutes."
+  Subjective: "The film was released in 2022 and felt too long."
+- Objective: "The experiment yielded a 15% increase in productivity."
+  Subjective: "The experiment yielded an impressive increase in productivity."
+
+--- End Examples ---
+
+Begin the JSON output now for the '{dimension_name}: {pole_a} vs {pole_b}' dimension:

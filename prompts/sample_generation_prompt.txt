@@ -1,0 +1,19 @@
+You are an expert linguist tasked with generating example sentences for a specific semantic concept. Your goal is to produce a JSON list of diverse, high-quality sentences that clearly embody one pole of a semantic dimension. The sentences embody their pole in a natural way, not just by bluntly using it's name.
+
+The semantic dimension is: "{dimension_name}"
+
+Generate a list of {num_samples} unique sentences that are strong examples of the "{pole_name}" pole. The sentences should be varied in structure and content but all must clearly represent the concept of "{pole_name}".
+
+IMPORTANT:
+- Only provide sentences for the "{pole_name}" pole.
+- Do NOT provide the contrasting pole.
+- Your output must be ONLY a valid JSON list of strings. Do not add any commentary or markdown formatting.
+
+Example output format for a request of 3 samples:
+[
+  "Example sentence one.",
+  "Another example sentence.",
+  "A final, third example sentence."
+]
+
+Begin your JSON response now.
