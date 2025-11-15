@@ -1,6 +1,4 @@
 # -----------------------------------------------------------------
-# Template Configuration for the Semantic Dimension Discovery Pipeline
-#
 # The embedding service settings below are pre-configured to work with
 # the CPU Docker command provided in the README Quick Start.
 #
