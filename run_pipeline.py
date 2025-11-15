@@ -95,13 +95,10 @@ def main():
     context.update_metadata(metadata_updates)
     context.save_artifact("vector", {"vector": vector_list})
 
-    # This logic is now robust and provides clear error messages.
     validation_input_path = None
     should_run_validation = False
-    
     override_path_str = args.pipeline_validation_pairs_override_path
 
-    # First, check if an override path was provided. This is the highest priority.
     if override_path_str:
         should_run_validation = True
         override_path = Path(override_path_str)
@@ -109,12 +106,10 @@ def main():
             logging.info(f"--- Preparing for Validation using Override File ---")
             validation_input_path = override_path
         else:
-            # If the provided path is invalid, FAIL LOUDLY and exit.
             logging.error(f"Validation override file NOT FOUND at the specified path: {override_path_str}")
             logging.error("Please check the path and try again. Aborting.")
             sys.exit(1)
     
-    # If no override was given, check the other flags.
     elif args.validate_new:
         should_run_validation = True
         logging.info("--- Starting Step 4a: Generate Validation Samples (Out-of-Sample) ---")
@@ -128,7 +123,6 @@ def main():
         logging.info("--- Starting Step 4a: Preparing for In-Sample Validation ---")
         validation_input_path = context.get_path_for("pairs")
     
-    # Now, run validation ONLY if one of the conditions was met and the path is valid.
     if should_run_validation:
         logging.info(f"--- Starting Step 4b: Running Validation on {validation_input_path.name} ---")
         report_text = vector_validation_logic(context, embed_generator, validation_input_path)

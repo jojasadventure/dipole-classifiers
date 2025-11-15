@@ -10,12 +10,12 @@ import numpy as np
 # Add project root to path for imports from the 'core' directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-# --- Project Imports ---
+
 from core.log_setup import setup_logging
 from core.embedding import EmbeddingGenerator
 from core.classifier import DimensionClassifier
 
-# --- Dependencies ---
+
 try:
     from datasets import load_dataset
     from tqdm import tqdm
@@ -24,7 +24,7 @@ except ImportError:
     print("Please install them with: pip install -r requirements.txt")
     sys.exit(1)
 
-# --- Helper for colored output ---
+
 class _Colors:
     GREEN, YELLOW, RED, BLUE, ENDC = '\033[92m', '\033[93m', '\033[91m', '\033[94m', '\033[0m'
 
@@ -130,7 +130,7 @@ def main():
         json.dump({"correlations": final_report, "all_results": all_samples}, f, indent=2)
     print(f"\nFull report saved to: {report_path}")
     
-    # --- ADDED BACK THE SAMPLE REPORTING ---
+    
     all_samples.sort(key=lambda x: x['predicted_score'])
     # Positive predicted score means MORE INFORMAL
     most_informal = all_samples[-5:]
@@ -138,16 +138,16 @@ def main():
     
     print(f"\n--- Samples Classified as Most Informal (by your vector) ---")
     for r in most_formal:
-        # Agreement means ground truth is positive
+        
         color = _Colors.GREEN if r['ground_truth_score'] > 0 else _Colors.RED
         print(f"{_Colors.BLUE}Pred Score: {r['predicted_score']:+.4f}{_Colors.ENDC} | {color}Actual Score: {r['ground_truth_score']:+.4f}{_Colors.ENDC} | Text: \"{r['sentence'][:100]}...\"")
 
     print(f"\n--- Samples Classified as Most Formal (by your vector) ---")
     for r in reversed(most_informal):
-        # Agreement means ground truth is negative
+        
         color = _Colors.GREEN if r['ground_truth_score'] < 0 else _Colors.RED
         print(f"{_Colors.YELLOW}Pred Score: {r['predicted_score']:+.4f}{_Colors.ENDC} | {color}Actual Score: {r['ground_truth_score']:+.4f}{_Colors.ENDC} | Text: \"{r['sentence'][:100]}...\"")
-    # --- END OF SAMPLE REPORTING ---
+    
 
     print("\n----------------------------------------")
     print(f"Performance ({embedding_model_id}): {words_per_second:,.0f} words/sec")

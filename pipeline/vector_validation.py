@@ -151,7 +151,6 @@ def _format_pair_results(report_data: dict) -> str:
     lines.append(f"Overall Accuracy: {summary_color}{report_data['accuracy']:.2f}%{_Colors.ENDC} ({report_data['correct_count']}/{report_data['total_count']})")
     lines.append("-" * 80)
 
-    # Add the training pairs info string right here
     lines.append(report_data['training_pairs_info'])
     lines.append("--- Validation Pair Results ---")
     summary_color = _Colors.GREEN if report_data['accuracy'] >= 95 else _Colors.YELLOW

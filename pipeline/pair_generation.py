@@ -7,7 +7,6 @@ import time
 from pathlib import Path
 from typing import TYPE_CHECKING, List, Tuple, Optional
 
-# Allow the module to import from the 'core' directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from core.llm_router import LLMRouter
 

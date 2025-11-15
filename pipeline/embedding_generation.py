@@ -3,17 +3,14 @@ import sys
 import logging
 from pathlib import Path
 from typing import TYPE_CHECKING, List, Dict, Any, Optional
-
 from tqdm import tqdm
 
-# Allow the module to import from the 'core' directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from core.embedding import EmbeddingGenerator
 
 if TYPE_CHECKING:
     from core.context import ExperimentContext
 
-# --- Core Logic Function (The public API of this module) ---
 def embedding_generation_logic(context: 'ExperimentContext', embed_generator: EmbeddingGenerator) -> Optional[list]:
     """
     Generates embeddings for all sentences in the pairs artifact.
@@ -39,7 +36,7 @@ def embedding_generation_logic(context: 'ExperimentContext', embed_generator: Em
     logging.info(f"Using pole keys: '{pole_a_key}' and '{pole_b_key}'")
 
     all_texts_to_embed = []
-    text_mapping = []  # To map flat list index back to pair and pole
+    text_mapping = []
 
     for i, pair in enumerate(pairs_data):
         if pole_a_key not in pair or pole_b_key not in pair:
@@ -67,13 +64,11 @@ def embedding_generation_logic(context: 'ExperimentContext', embed_generator: Em
         logging.error(f"An exception occurred during embedding generation: {e}", exc_info=True)
         return None
     
-    # --- Structure Results ---
     structured_results = [{} for _ in range(len(pairs_data))]
     for i, embedding in enumerate(tqdm(embeddings_list, desc="Structuring results")):
         map_info = text_mapping[i]
         pair_idx, pole = map_info['pair_index'], map_info['pole']
 
-        # Initialize the dictionary for the pair if it's the first time we see it
         if 'original_pair' not in structured_results[pair_idx]:
             structured_results[pair_idx]['original_pair'] = pairs_data[pair_idx]
             structured_results[pair_idx]['embeddings'] = {}
@@ -82,7 +77,6 @@ def embedding_generation_logic(context: 'ExperimentContext', embed_generator: Em
             "text": map_info['original_text'], "vector": embedding
         }
 
-    # Filter out any pairs that might have been skipped or failed
     final_results = [res for res in structured_results if 'original_pair' in res]
     logging.info(f"Successfully generated and structured embeddings for {len(final_results)} pairs.")
     

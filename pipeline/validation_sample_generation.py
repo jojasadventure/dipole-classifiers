@@ -6,7 +6,6 @@ import random
 from pathlib import Path
 from typing import TYPE_CHECKING, List, Set, Optional
 
-# Allow the module to import from the 'core' directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from core.llm_router import LLMRouter
 
@@ -46,7 +45,6 @@ def validation_sample_generation_logic(context: 'ExperimentContext', router: LLM
         logging.error(f"Error reading prompt template file at {prompt_file_path}: {e}")
         return None
 
-    # A single set to track all unique samples across both poles
     master_seen_samples = set()
     samples_a, samples_b = [], []
 
@@ -54,14 +52,13 @@ def validation_sample_generation_logic(context: 'ExperimentContext', router: LLM
     for pole_name, sample_list in [(context.pole_a, samples_a), (context.pole_b, samples_b)]:
         logging.info(f"--- Generating {num_samples_per_pole} unique samples for pole: '{pole_name}' ---")
         
-        # Consistent while loop, just like pair_generation.py
         total_api_calls = 0
-        max_total_calls = (num_samples_per_pole // (batch_size // 2)) + 5 # Generous attempt limit
+        max_total_calls = (num_samples_per_pole // (batch_size // 2)) + 5
 
         while len(sample_list) < num_samples_per_pole and total_api_calls < max_total_calls:
             total_api_calls += 1
             samples_needed = num_samples_per_pole - len(sample_list)
-            samples_to_request = min(batch_size, samples_needed + 2) # Request a bit more to account for duplicates
+            samples_to_request = min(batch_size, samples_needed + 2)
             
             logging.info(f"API Call {total_api_calls}/{max_total_calls}: Requesting {samples_to_request} for '{pole_name}'. Have {len(sample_list)}/{num_samples_per_pole}.")
             prompt = prompt_template.format(

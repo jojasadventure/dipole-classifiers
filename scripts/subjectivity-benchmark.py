@@ -67,7 +67,7 @@ def main():
     
 
     texts = [ex['Sentence'] for ex in ds]
-    true_labels = [ex['Label'] for ex in ds] # This is now a list of 'SUBJ' and 'OBJ' strings.
+    true_labels = [ex['Label'] for ex in ds] # This is a list of 'SUBJ' and 'OBJ' strings.
     
 
     print(f"Benchmarking vector: {args.vector}")

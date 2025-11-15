@@ -9,12 +9,12 @@ import time
 # Add project root to path for imports from the 'core' directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-# --- Project Imports ---
+
 from core.log_setup import setup_logging
 from core.embedding import EmbeddingGenerator
 from core.classifier import DimensionClassifier
 
-# --- Dependencies ---
+
 try:
     from datasets import load_dataset
     from sklearn.metrics import accuracy_score
@@ -24,7 +24,7 @@ except ImportError:
     print("Please install them with: pip install -r requirements.txt")
     sys.exit(1)
 
-# --- Helper for colored output ---
+
 class _Colors:
     GREEN, RED, ENDC = '\033[92m', '\033[91m', '\033[0m'
 

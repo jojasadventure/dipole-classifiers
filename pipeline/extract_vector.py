@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Tuple, Optional, Dict, Any
 import numpy as np
 from tqdm import tqdm
 
-# Allow the module to import from the 'core' directory
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 if TYPE_CHECKING:

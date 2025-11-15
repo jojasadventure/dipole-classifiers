@@ -97,6 +97,22 @@ The interactive tool will automatically discover the vector you just created.
 python scripts/classify.py
 ```
 
+**Step 5: Benchmark a Classifier**
+
+Once you have a vector, you can run the corresponding benchmark script. The required `-v`/`--vector` argument is the path to your `dimension_vector.json` file in the results dir. 
+
+
+#### **Example: SST-2 Sentiment Benchmark**
+```bash
+python sst2-benchmark.py \
+  --vector results/Sentiment_Positive_vs_Negative/openaigpt-4o_50p_20240520-103000/dimension_vector.json
+```
+
+#### **Example: Pavlick Formality Benchmark**
+```bash
+python pavlick-formality-benchmark.py \
+  --vector results/Formality_Formal_vs_Informal/openaigpt-4o_50p_20240520-103500/dimension_vector.json
+```
 
 
 ## Settings in `config.yaml`
@@ -241,16 +257,3 @@ The main orchestrator is `run_pipeline.py` and imports from modules in the `pipe
     *   **Normalize Final Vector:** The final average is normalized to produce the clean semantic unit vector.
 6.  **Save Artifacts:** After each step, the orchestrator saves the resulting artifact (e.g., `pairs.json`, `dimension_vector.json`) to the unique run directory.
 7.  **Validate Vector (Optional) (`pipeline/vector_validation.py`):** If a validation flag is used, the orchestrator calls `vector_validation_logic()` to test the new vector and save a detailed report.
-
-
-
-
-
-
-## Future Directions
-
-- Training data sources (synthetic vs real vs hybrid)
-- Prompt engineering strategies for different dimensions
-- Multi-model comparisons (LLM and embedding choices)
-- Dimension combinations and multi-axis classification
-- Domain-specific optimizations
