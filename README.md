@@ -1,10 +1,10 @@
 # Dipole classifiers
 Fast, lightweight semantic classifiers from contrastive sentence pairs. Train a ~1KB vector on 20 synthetic examples, achieve 82% accuracy on IMDB (Sentiment) at 30k words/second. 
 
-This repo demonstrates a technique of creating semantic directions in embedding space from contrastive sentence pairs.
+This repo demonstrates a technique for creating semantic directions in embedding space from contrastive sentence pairs.
 It identifies vectors (e.g., sentiment, formality, urgency) which can be used for lightweight classification or analysis with other embeddings in the same space. 
 
-The benchmark results (see below) should be possible to recreate with this code.
+The benchmark results (see below) should be reproducible with this code.
 
 
 ![Training and classification workflow demonstration](docs/train-and-classify-demo.gif)
@@ -19,7 +19,7 @@ Tested against standard datasets with these results:
 - **Pavlick Formality**: 0.61 correlation (r)
 
 All using ~1KB semantic vectors derived from 20-100 synthetic training pairs.
-Note: Increasing number of training pairs to 500 did not improve accuracy in one experiment.
+Increasing number of training pairs to 500 did not improve accuracy in one experiment.
 
 **Speed**: ~30k words/second on RTX 3090 (embedding inference). Single dot product per classification runs on CPU.
 
@@ -32,7 +32,7 @@ This is **not** a replacement for fine-tuned transformers when you need maximum 
 This could be useful for:
 - Extremely fast inference
 - Zero-shot classification without labeled training data
-- Custom dimensions w/o training datasets ("insightful vs confused", "ephemeral vs important")
+- Custom dimensions without training datasets ("insightful vs confused", "ephemeral vs important")
 - Rapid prototyping and experimentation
 - Edge deployment
 
@@ -55,9 +55,8 @@ pip install -r requirements.txt
 
 ### **Step 2: Setup the Embedding Service**
 
-You can use an external API or deploy your own Hugging Face `text-embeddings-inference` Docker container. Faster on GPU.
-Both the docker steps will download the embedding model (~1GB) and start the required inference server. 
-You need to stop it later. You can monitor it with eg. `docker stats`.
+You can use an external API or deploy your own Hugging Face `text-embeddings-inference` docker container. Faster on GPU.
+Both the docker steps will download the embedding model (~1GB) and start the required inference server.
 
 Choose one of the following paths:
 
@@ -66,7 +65,7 @@ Choose one of the following paths:
 
 - OPTION B: CPU embedding: 
   - Copy config.yaml.cpu to config.yaml
-  - Run TEI docker for CPU command below. Note: Stop later with `docker stop tei-cpu`.
+  - Run the TEI docker for CPU command below (shutdown TEI with `docker stop tei-cpu`):
 
 ```bash
 docker run -d -p 8080:80 --name tei-cpu \
@@ -81,9 +80,9 @@ docker run -d -p 8080:80 --name tei-cpu \
 
 
 ### **Step 3: Configure Your LLM API Key**
-Keep editing the config.yaml and setup your LLM API details:
+Continue editing the config.yaml and set up your LLM API details:
 - e.g. set provider to "google", "openai" , "ollama" 
-- edit their settings such as URL and API key
+- edit the settings such as URL and API key
 
 
 
@@ -100,34 +99,34 @@ python scripts/classify.py
 
 
 
-## Command-line arguments for run_pipeline.py and settings in `config.yaml`
-
-Important: Write CLI params with hyphens. 
-```bash
-$ python run_pipeline.py
-usage: run_pipeline.py [-h] --dimension DIMENSION [--config CONFIG] [--validate-sample] [--validate-new] [--llm-provider {google,openai,ollama}] [--llm-api-key LLM_API_KEY] [--llm-api-url LLM_API_URL]
-                       [--llm-model-name LLM_MODEL_NAME] [--llm-temperature LLM_TEMPERATURE] [--llm-num-pairs LLM_NUM_PAIRS] [--embedding-api-url EMBEDDING_API_URL] [--embedding-model-id EMBEDDING_MODEL_ID]
-                       [--pipeline-run-validation-by-default] [--num-validation-samples NUM_VALIDATION_SAMPLES] [--pipeline-validation-pairs-override-path PIPELINE_VALIDATION_PAIRS_OVERRIDE_PATH]
-
-$ python run_pipeline.py --dimension "Anthromomorphic: Cat-Person vs Dog-Person" --num-pairs 20 --validate-sample
-```
-Command-line arguments will always override the values in the file.
+## Settings in `config.yaml`
 
 Write the config.yaml parameters with underscores: 
 
 *   `llm_provider`: **Required.** `google`, `openai`, or `ollama`.
 *   `llm_api_key`: **Required** for `google` and `openai`.
 *   `llm_api_url`: Optional override for `openai` (e.g., OpenRouter), **Required** for `ollama` (e.g., `http://localhost:11434/v1`).
+*   `llm_batch_size`: How many sentence pairs or samples to request in a single API call.
 *   `llm_model_name`: The specific model identifier (e.g., `gemini-1.5-pro-latest`).
 *   `llm_temperature`, `llm_num_pairs`: Control the generation process.
+
 *   `embedding_api_url`: **Required.** The base URL of your embedding service (e.g., `http://localhost:8080`). The pipeline appends `/embed`.
 *   `embedding_model_id`: **Required.** The model ID used by the embedding service (e.g., `nomic-ai/nomic-embed-text-v1.5`).
-*   `pipeline_run_validation_by_default`: Set to `true` or `false` to run in-sample validation by default.
-*   `pipeline_num_validation_samples`: The number of samples to generate per pole for out-of-sample validation.
-*   `--prompt-file` Path to a custom prompt template to replace the default prompt.
-*   `--prompt-extra-text "..."` Add text into the `{extra_instructions}` placeholder in the prompt (works also for default)
 
-Examples:
+*   `pipeline_run_validation_by_default`: Run in-sample validation by default.
+*   `pipeline_num_validation_samples`:  Number of samples to generate per pole for out-of-sample validation.
+
+If you want to run the above from terminal as arguments, please write with hyphens.
+Command-line arguments will always override the values in the file. The below arguments make most sense for direct use in CLI: 
+*   `prompt-file` Path to a custom prompt template to replace the default prompt.
+*   `prompt-extra-text "..."` Add text extra text to the built-in prompt
+*   `validate-sample`  Run in-sample validation on the pairs used to generate the vector.
+*   `validate-new` Generate new synthetic single samples and run validation on these.
+*   `pipeline-num-validation-samples` How many in-model synthetic samples to validate on.
+*   `pipeline-validation-pairs-override-path` Validate against samples from a previous run.
+
+
+### CLI Examples:
 
 
 ```bash
