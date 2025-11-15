@@ -24,22 +24,19 @@ Note: Increasing number of training pairs to 500 did not improve accuracy in one
 **Speed**: ~30k words/second on RTX 3090 (embedding inference). Single dot product per classification runs on CPU.
 
 
-![IMDB benchmark validation demonstration](docs/imdb-bench-demo.gif)
-
-
 
 ### What This Is (And Isn't)
 
 This is **not** a replacement for fine-tuned transformers when you need maximum accuracy. 
 
-This **is** useful when you need:
-- Extremely fast inference (30k words/sec vs ~1k for BERT)
+This could be useful for:
+- Extremely fast inference
 - Zero-shot classification without labeled training data
-- Custom dimensions that don't have training datasets ("insightful vs confused", "ephemeral vs important")
+- Custom dimensions w/o training datasets ("insightful vs confused", "ephemeral vs important")
 - Rapid prototyping and experimentation
-- Edge deployment with minimal resources
+- Edge deployment
 
-**Trade-off**: ~10-15% accuracy penalty vs fine-tuned models, but 30x faster and trained in minutes on synthetic data instead of hours on thousands of labeled examples.
+**Trade-off**: ~10-15% accuracy penalty vs fine-tuned models, but 30x faster and trained in minutes on synthetic data, instead of hours on thousands of labeled examples.
 
 
 
@@ -64,10 +61,10 @@ You need to stop it later. You can monitor it with eg. `docker stats`.
 
 Choose one of the following paths:
 
-- A: External API: Use your own embedding API like Jina: 
+- OPTION A: External API: Use your own embedding API like Jina: 
   - Copy config.yaml.template to config.yaml and set your api settings in there.
 
-- B: CPU embedding: 
+- OPTION B: CPU embedding: 
   - Copy config.yaml.cpu to config.yaml
   - Run TEI docker for CPU command below. Note: Stop later with `docker stop tei-cpu`.
 
@@ -77,7 +74,7 @@ docker run -d -p 8080:80 --name tei-cpu \
   --model-id nomic-ai/nomic-embed-text-v1.5
 ```
 
-- C: GPU embedding:
+- OPTION C: GPU embedding:
     - Edit the provided docker-compose.tei.yaml to set your GPU IMAGE_TAG
     - Optionally rename to docker-compose.yml and run
 
