@@ -10,7 +10,7 @@ The benchmark results (see below) should be reproducible with this code.
 ![Training and classification workflow demonstration](docs/train-and-classify-demo.gif)
 
 
-## Benchmarks
+### Benchmarks
 
 Tested against standard datasets with these results:
 
