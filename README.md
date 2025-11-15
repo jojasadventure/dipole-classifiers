@@ -9,8 +9,6 @@ The benchmark results (see below) should be possible to recreate with this code.
 
 ![Training and classification workflow demonstration](docs/train-and-classify-demo.gif)
 
-![IMDB benchmark validation demonstration](docs/imdb-bench-demo.gif)
-
 
 ## Benchmarks
 
@@ -24,6 +22,9 @@ All using ~1KB semantic vectors derived from 20-100 synthetic training pairs.
 Note: Increasing number of training pairs to 500 did not improve accuracy in one experiment.
 
 **Speed**: ~30k words/second on RTX 3090 (embedding inference). Single dot product per classification runs on CPU.
+
+
+![IMDB benchmark validation demonstration](docs/imdb-bench-demo.gif)
 
 
 
