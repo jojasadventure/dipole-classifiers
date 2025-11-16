@@ -36,8 +36,12 @@ This could be useful for:
 - Rapid prototyping and experimentation
 - Edge deployment
 
-**Trade-off**: Accuracy penalty vs fine-tuned models, but 30x faster and trained in minutes on synthetic data instead of hours on huge labeled datasets.
+**Trade-off**: Accuracy penalty vs fine-tuned models, but 30x faster and trained in minutes on synthetic data vs hours on huge labeled datasets.
 
+### Sample outputs
+
+Example output from training runs here:
+![Sample outputs](docs/sample-output.md)
 
 
 ## How to setup and run
