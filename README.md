@@ -36,7 +36,7 @@ This could be useful for:
 - Rapid prototyping and experimentation
 - Edge deployment
 
-**Trade-off**: ~10-15% accuracy penalty vs fine-tuned models, but 30x faster and trained in minutes on synthetic data, instead of hours on thousands of labeled examples.
+**Trade-off**: Accuracy penalty vs fine-tuned models, but 30x faster and trained in minutes on synthetic data instead of hours on huge labeled datasets.
 
 
 
@@ -46,7 +46,7 @@ This requires access to an embedding server and an LLM API as well as Python3.10
 
 ### **Step 1: Clone & Setup Python Environment**
 ```bash
-git clone https://github.com/your-name/your-repo.git
+git clone https://github.com/jojasadventure/dipole-classifiers
 cd your-repo
 python3 -m venv venv
 source venv/bin/activate
@@ -257,3 +257,78 @@ The main orchestrator is `run_pipeline.py` and imports from modules in the `pipe
     *   **Normalize Final Vector:** The final average is normalized to produce the clean semantic unit vector.
 6.  **Save Artifacts:** After each step, the orchestrator saves the resulting artifact (e.g., `pairs.json`, `dimension_vector.json`) to the unique run directory.
 7.  **Validate Vector (Optional) (`pipeline/vector_validation.py`):** If a validation flag is used, the orchestrator calls `vector_validation_logic()` to test the new vector and save a detailed report.
+
+
+
+
+
+Excellent! We have the data. It's clean, concise, and tells a fascinating story. Thank you for working through those script issues with me.
+
+Based on this output, I've analyzed the results and drafted a "Results & Findings" section for your README. This goes beyond just stating the numbers and pulls out the key insights that will help users understand the strengths and nuances of your technique.
+
+First, here's a quick summary of the key takeaways I've identified:
+
+*   **Core claim validated:** Your headline numbers (82-84% on sentiment benchmarks) are confirmed with just 20 synthetic pairs.
+*   **Diminishing returns are real:** The 20 vs. 500 pair experiment is a powerful proof point. The massive increase in data barely moved the needle on accuracy.
+*   **Generator LLM matters:** Some LLMs produce much better training pairs for certain concepts than others.
+*   **Concept difficulty varies:** "Sentiment" and "Confidence" are easy to capture. More abstract concepts like "Immediacy" or "Insight" are much harder.
+*   **Synthetic validation is a good "sanity check"**, but not a perfect predictor of real-world performance.
+
+---
+
+
+## Experimental Results & Findings
+
+The following table showcases some of the most representative results. "Synthetic Accuracy" refers to the model's performance on new, synthetically generated samples from the same LLM that created the training pairs.
+
+| Dimension                | LLM Generator                | # Pairs | Synthetic Accuracy | Benchmark Score (Dataset)            |
+| ------------------------ | ---------------------------- | ------- | ------------------ | ------------------------------------ |
+| **Sentiment / Valence**  | `openaigpt-oss-120b`         | 20      | 100%               | **84.3%** (SST-2), **82.3%** (IMDB)      |
+| **Sentiment / Valence**  | `openaigpt-oss-120b`         | 500     | -                  | 84.5% (SST-2), 84.5% (IMDB)      |
+| **Sentiment**            | `mistral-small-3.2`          | 20      | 97.5%              | 81.7% (IMDB)                         |
+| **Confidence**           | `openaigpt-oss-120b`         | 10      | 97.5%              | -                                    |
+| **Agency (Proactive)**   | `openaigpt-oss-120b`         | 30      | 87.5%              | -                                    |
+| **Objectivity**          | `openaigpt-oss-120b`         | 50      | -                  | 66.7% (Subjectivity Dataset)         |
+| **Insight (Confused)**   | `openaigpt-oss-120b`         | 30      | 60-85%             | -                                    |
+| **Immediacy (Abstract)** | `z-aiglm-4.5-airfree`        | 30      | 56.5%              | -                                    |
+
+### High Performance on Small Data
+
+A sentiment vector trained on just **20 synthetic pairs** from a capable LLM (`openaigpt-oss-120b`) achieved **84.3% on SST-2** and **82.3% on IMDB**. 
+
+### Diminishing Returns
+
+When comparing a sentiment vector from 20 pairs against one from **500 pairs**:
+
+*   **20 pairs:** 84.3% (SST-2) / 82.3% (IMDB)
+*   **500 pairs:** 84.5% (SST-2) / 84.5% (IMDB)
+
+Increasing the training data by **25x** yielded only a marginal **~0.2%** improvement on SST-2 and **~2.2%** on IMDB.
+
+
+
+## Case Study: Prompt Engineering a "Confidence" Classifier
+
+To understand the impact of prompting a targeted experiment was run with a "Confidence: Tentative vs. Confident" dimension.
+
+**The Prompts:**
+1.  **"Short & Consistent" (V1):** Used four highly parallel examples focusing on direct linguistic markers (e.g., "suggests" vs. "shows").
+2.  **"Long & Detailed" (V4):** Used five more varied examples, including one specifically designed to teach the model about "implied confidence" (e.g., describing a confident action).
+
+**The Process:**
+1.  Realised a fixed synthetic validation was needed instead of new random samples each run.
+2.  Refined prompt and ran a high-scoring validation set to use as a fixed synthetic benchmark.
+3.  Created both short and long prompts. Tested resulting classifiers against fixed benchmark for a fair comparison.
+
+**Results:**
+
+| Prompt Version | Description | Accuracy on Fixed Benchmark |
+| :--- | :--- | :---: |
+| **V1** | **Short & Consistent** | **97.5%** |
+| V4 | Long & Detailed | 92.5% |
+
+**Takeaways:**
+
+*   **Consistency is King:** The "Short & Consistent" prompt, despite its simplicity, produced a significantly better and more robust classifier. The clean, focused signal was more effective than the more complex prompt that tried to account for every nuance. The simpler prompt's vector generalized better, even to the edge cases it wasn't explicitly shown.
+*   **Initial Validation Can Be Misleading:** Testing against a randomly generated validation set can create an illusion of performance. A prompt might just get lucky with the set of examples it's tested against. **Using a fixed benchmark is better** for true, apples-to-apples comparisons between different approaches. (Obviously does not substitute real datasets.)
+*   **Hypothesis:** A few high-quality, highly parallel examples in your prompt are more effective than a large, varied set. Focus on providing the LLM with a strong, unambiguous core concept.
