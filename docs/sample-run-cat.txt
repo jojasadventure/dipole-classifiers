@@ -1,0 +1,194 @@
+# experimental, high-priority science
+
+$ python run_pipeline.py --dimension "Felinity: Catlike vs Human" --prompt-extra-text "Note: This is a special experimental classifier to distinguish anything catlike - languid poses, sleeping, scratching posts, mouse hunting, gait, purring, being independent, the slow blink, the quick reflexes, headbutting hands, knocking glasses off tables... but NOT barking..." --validate-new --num-pairs 20
+
+03:18:43 - Configuration defaults loaded from config.yaml
+03:18:43 - Initialized ExperimentContext. Output will be in: results/Felinity_Catlike_vs_Human/mistral-small3.224b_20p_20251116-031843
+03:18:43 - Initialized OpenAI client with model: mistral-small3.2:24b
+03:18:43 - --- Starting Step 1: Generate Pairs ---
+03:18:43 - Using default prompt file: /home/j/2pole-classifiers-github-staging/prompts/pair_generation_prompt.txt
+03:18:43 - --- API Call 1/24 | Target: 20, Have: 0 ---
+03:19:50 - HTTP Request: POST http://10.68.7.107:3000/api/chat/completions "HTTP/1.1 200 OK"
+03:19:50 - Parsed 20, added 20 new unique pairs. Total is now 20.
+03:19:50 - Metadata updated with: {'num_pairs_generated': 20, 'prompt_template_content': '\nGenerate exactly 20 unique pairs of sentences. Each pair should consist of:\n1. A sentence representing the \'Catlike\' pole of the \'Felinity\' dimension.\n2. A sentence representing the \'Human\' pole of the \'Felinity\' dimension.\n\nBoth sentences in a pair should be about the same core topic or situation, differing primarily along the \'Felinity\' dimension (Catlike vs. Human). The topics should be varied (e.g., work projects, social interactions, product reviews, food experiences, general observations). Keep sentences relatively concise (approx. 10-30 words).\n\nNote: This is a special experimental classifier to distinguish anything catlike - languid poses, sleeping, scratching posts, mouse hunting, gait, purring, being independent, the slow blink, the quick reflexes, headbutting hands, knocking glasses off tables... but NOT barking...\n\nFormat the output strictly as a JSON list of objects. Each object in the list must have exactly two keys: "catlike" and "human".\n\n--- Examples of Good Contrastive Pairs ---\n\nKey Principles:\n1. **Minimal semantic drift**: Same core info, differ only on target dimension.\n2. **Precision in opposition**: Clear opposites on the dimension.\n3. **Content consistency**: No significant extra info in either pair.\n\n1. Formality-Casualness (formal vs. casual)\n- Formal: "The meeting has been rescheduled to accommodate the participants\' schedules."\n  Casual: "We moved the meeting because everyone\'s schedules were messy."\n- Formal: "Please proceed with the implementation as discussed."\n  Casual: "Go ahead and do what we talked about."\n- Formal: "Your assistance in this matter would be greatly appreciated."\n  Casual: "I\'d really appreciate your help with this."\n\n2. Simple-Complex (simple vs. complex)\n- Simple: "The drug reduces inflammation in joints."\n  Complex: "The pharmaceutical agent inhibits inflammatory cytokine production within synovial articulations."\n- Simple: "Plants convert sunlight to energy."\n  Complex: "Photosynthetic organisms transform solar radiation into chemical energy via electron transport chains."\n- Simple: "Better education leads to higher earnings."\n  Complex: "Enhanced educational attainment correlates with increased income potential."\n\n3. Objective-Subjective (objective vs. subjective)\n- Objective: "The painting uses blue and yellow colors throughout."\n  Subjective: "The painting uses beautiful and vibrant colors throughout."\n- Objective: "The film was released in 2022 and ran for 136 minutes."\n  Subjective: "The film was released in 2022 and felt too long."\n- Objective: "The experiment yielded a 15% increase in productivity."\n  Subjective: "The experiment yielded an impressive increase in productivity."\n\n--- End Examples ---\n\nBegin the JSON output now for the \'Felinity: Catlike vs Human\' dimension:\n'}
+03:19:50 - Saving artifact 'pairs' to results/Felinity_Catlike_vs_Human/mistral-small3.224b_20p_20251116-031843/pairs.json
+03:19:50 - --- Starting Step 2: Generate Embeddings ---
+03:19:50 - Loading artifact 'pairs' from results/Felinity_Catlike_vs_Human/mistral-small3.224b_20p_20251116-031843/pairs.json
+03:19:50 - Loaded 20 pairs for embedding.
+03:19:50 - Using pole keys: 'catlike' and 'human'
+Structuring results: 100%|█████████████████████████████████████████████| 40/40 [00:00<00:00, 157680.60it/s]
+03:19:50 - Successfully generated and structured embeddings for 20 pairs.
+03:19:50 - Saving artifact 'embeddings' to results/Felinity_Catlike_vs_Human/mistral-small3.224b_20p_20251116-031843/embeddings.json
+03:19:50 - --- Starting Step 3: Extract Vector ---
+03:19:50 - Loading artifact 'embeddings' from results/Felinity_Catlike_vs_Human/mistral-small3.224b_20p_20251116-031843/embeddings.json
+03:19:50 - Loaded 20 embedding entries.
+03:19:50 - Using pole keys from metadata: 'catlike' and 'human'
+Calculating difference vectors: 100%|███████████████████████████████████| 20/20 [00:00<00:00, 19125.87it/s]
+03:19:50 - Averaging 20 normalized difference vectors from 20 valid pairs.
+03:19:50 - Final dimension vector calculated with shape: (768,)
+03:19:50 - Metadata updated with: {'num_pairs_used_for_vector': 20, 'vector_dimensionality': 768}
+03:19:50 - Saving artifact 'vector' to results/Felinity_Catlike_vs_Human/mistral-small3.224b_20p_20251116-031843/dimension_vector.json
+03:19:50 - --- Starting Step 4a: Generate Validation Samples (Out-of-Sample) ---
+03:19:50 - --- Generating 20 unique samples for pole: 'Catlike' ---
+03:19:50 - API Call 1/7: Requesting 20 for 'Catlike'. Have 0/20.
+03:20:22 - HTTP Request: POST http://10.68.7.107:3000/api/chat/completions "HTTP/1.1 200 OK"
+03:20:22 - Parsed 20, added 20 new unique samples.
+03:20:22 - --- Generating 20 unique samples for pole: 'Human' ---
+03:20:22 - API Call 1/7: Requesting 20 for 'Human'. Have 0/20.
+03:20:46 - HTTP Request: POST http://10.68.7.107:3000/api/chat/completions "HTTP/1.1 200 OK"
+03:20:46 - Parsed 20, added 20 new unique samples.
+03:20:46 - Successfully generated 40 total unique labeled samples.
+03:20:46 - Saving artifact 'validation_samples' to results/Felinity_Catlike_vs_Human/mistral-small3.224b_20p_20251116-031843/validation_samples.json
+03:20:46 - --- Starting Step 4b: Running Validation on validation_samples.json ---
+03:20:46 - Classifier initialized for dimension: 'Catlike' vs. 'Human'
+03:20:46 - Running out-of-sample validation on labeled samples.
+Evaluating samples: 100%|██████████████████████████████████████████████| 40/40 [00:00<00:00, 209715.20it/s]
+03:20:46 - Loading artifact 'pairs' from results/Felinity_Catlike_vs_Human/mistral-small3.224b_20p_20251116-031843/pairs.json
+
+================================================================================
+VALIDATION REPORT for Dimension: Felinity (Out-of-Sample)
+================================================================================
+-- Vector Details --
+Vector File: dimension_vector.json
+Generated From: 20 pairs created by model 'mistral-small3.2:24b'
+Embedding Model: nomic-ai/nomic-embed-text-v1.5
+
+-- Validation Details --
+Validation Samples: validation_samples.json
+Pole A (Negative Score): Catlike
+Pole B (Positive Score): Human
+--------------------------------------------------------------------------------
+Overall Accuracy: 82.50% (33/40)
+--------------------------------------------------------------------------------
+--- Training Pairs Used to Generate Vector ---
+Pair 1:
+  - Catlike: She stretched out lazily in the sun, purring softly.
+  - Human: She sat upright in the sun, reading a book quietly.
+Pair 2:
+  - Catlike: He batted at the dangling string with quick, precise paws.
+  - Human: He reached out and grabbed the dangling string with his hand.
+Pair 3:
+  - Catlike: The creature knocked the glass off the table with a flick of its tail.
+  - Human: The person accidentally knocked the glass off the table while reaching for it.
+Pair 4:
+  - Catlike: It watched the mouse intently, tail twitching with anticipation.
+  - Human: He watched the mouse intently, planning how to catch it with a trap.
+Pair 5:
+  - Catlike: She rubbed her head against the hand, leaving a faint scent.
+  - Human: She shook hands firmly, making eye contact.
+... and 15 more pairs.
+
+
+--- Validation Sample Results ---
+Overall Accuracy: 82.50% (33/40)
+--------------------------------------------------------------------------------
+--- Results for Pole A: Catlike ---
+RESULT       | SCORE        | PREDICTION      | TEXT
+........................................
+[CORRECT]     | -0.2288      | Catlike         | Her playful teasing was as light and teasing as a cat batting at a dangling string.
+[CORRECT]     | -0.2174      | Catlike         | The way she licked her lips after tasting the dessert was a small, feline gesture of satisfaction.
+[CORRECT]     | -0.1996      | Catlike         | The way he stretched after waking up, limbs extending in a slow, deliberate motion, was pure feline indulgence.
+[CORRECT]     | -0.1700      | Catlike         | The way she curled up in the armchair, legs tucked neatly under her, was unmistakably feline.
+[CORRECT]     | -0.1604      | Catlike         | She moved with the quiet grace of a feline, her steps barely disturbing the fallen leaves.
+[CORRECT]     | -0.1570      | Catlike         | Her independence was legendary, much like a cat that refuses to be owned by anyone.
+[CORRECT]     | -0.1439      | Catlike         | The detective’s patience was feline—waiting for the perfect moment to strike.
+[CORRECT]     | -0.1375      | Catlike         | Her eyes narrowed with the same calculating intensity as a cat sizing up its prey.
+[CORRECT]     | -0.0864      | Catlike         | She had a habit of bringing small, random objects home, a quirk that her friends jokingly called her 'cat-like collection.'
+[CORRECT]     | -0.0856      | Catlike         | The artist’s hands danced across the canvas with the same precision and elegance as a cat stalking its prey.
+[CORRECT]     | -0.0546      | Catlike         | The way he pounced on the opportunity was as swift and decisive as a cat leaping for a mouse.
+[CORRECT]     | -0.0202      | Catlike         | He had a knack for always landing on his feet, a trait that made his colleagues dub him 'the office cat.'
+[CORRECT]     | -0.0180      | Catlike         | She had an uncanny ability to always find the sunniest spot in the room, a habit that earned her the nickname 'Sunbeam.'
+[CORRECT]     | -0.0136      | Catlike         | The way he purred with contentment after a good meal was the most endearing trait about him.
+[CORRECT]     | -0.0103      | Catlike         | The way he navigated the crowded subway with effortless agility reminded her of a cat weaving through furniture.
+[CORRECT]     | -0.0095      | Catlike         | His curiosity was boundless, much like a cat investigating every nook and cranny of a new house.
+[INCORRECT]   | +0.0026      | Human           | The scientist’s meticulous attention to detail was as sharp as a cat’s focus on a laser pointer.
+[INCORRECT]   | +0.0120      | Human           | The way he observed the room from his perch reminded everyone of a cat watching birds through a window.
+[INCORRECT]   | +0.0395      | Human           | His ability to ignore the chaos around him and focus solely on his task was as impressive as a cat tuning out a noisy household.
+[INCORRECT]   | +0.0616      | Human           | His aloofness was legendary, a trait that made him the most enigmatic figure in the department.
+--- Results for Pole B: Human ---
+RESULT       | SCORE        | PREDICTION      | TEXT
+........................................
+[INCORRECT]   | -0.0645      | Catlike         | The team debated the ethical implications of the new policy for hours, considering every angle.
+[INCORRECT]   | -0.0066      | Catlike         | She carefully crafted the argument, knowing her audience would appreciate the nuanced perspective.
+[INCORRECT]   | -0.0055      | Catlike         | She hesitated before pressing send, double-checking the email for any mistakes.
+[CORRECT]     | +0.0070      | Human           | They gathered around the table, laughing and sharing stories from their childhoods.
+[CORRECT]     | +0.0109      | Human           | The artist poured her emotions into the painting, each brushstroke telling a part of her story.
+[CORRECT]     | +0.0227      | Human           | She doodled in the margins of her notebook, her mind wandering to distant places.
+[CORRECT]     | +0.0439      | Human           | The lawyer presented the evidence, carefully constructing a case that left no room for doubt.
+[CORRECT]     | +0.0550      | Human           | She felt a pang of guilt as she realized she had forgotten her friend's birthday.
+[CORRECT]     | +0.0713      | Human           | The historian pieced together the fragments of the past, weaving a narrative of human struggle and triumph.
+[CORRECT]     | +0.0730      | Human           | He felt a surge of pride as his child took their first steps.
+[CORRECT]     | +0.0739      | Human           | The poet wove words together like threads, creating a tapestry of emotion and thought.
+[CORRECT]     | +0.0871      | Human           | The musician composed a melody that captured the essence of longing and hope.
+[CORRECT]     | +0.0885      | Human           | The chef tasted the sauce, adjusting the seasoning with a practiced hand.
+[CORRECT]     | +0.0910      | Human           | They exchanged knowing glances, a silent understanding passing between them.
+[CORRECT]     | +0.1029      | Human           | The scientist meticulously recorded every observation, ensuring no detail was overlooked.
+[CORRECT]     | +0.1114      | Human           | The writer struggled to find the right words, knowing the impact they would have.
+[CORRECT]     | +0.1285      | Human           | His hands trembled as he signed the document, a mix of excitement and fear coursing through him.
+[CORRECT]     | +0.1481      | Human           | He paused to catch his breath, the weight of the decision pressing heavily on his shoulders.
+[CORRECT]     | +0.1646      | Human           | The architect envisioned a space that would inspire and uplift those who entered.
+[CORRECT]     | +0.1879      | Human           | He stood at the podium, his voice steady as he addressed the crowd of thousands.
+================================================================================
+
+03:20:46 - FINAL_ACCURACY:82.50% (33/40)
+
+
+
+
+
+
+
+$ python scripts/classify.py
+
+Loaded Vector: Catlike vs. Human
+Dimension: Catlike (Pole A) vs. Human (Pole B)
+--------------------------------------------------------------------------------
+Entering interactive mode. Press Ctrl+C to exit.
+> purr
+-0.2869 (Strongly Catlike)
+> I will curl up in your lap now.
+-0.0535 (Moderately Catlike)
+> I would like to meet you at the library
++0.0788 (Moderately Human)
+> I will sit on the table
++0.0016 (Slightly Human)
+> I will sit on my box
+-0.0549 (Moderately Catlike)
+> I have a present for you :§
++0.0016 (Slightly Human)
+> Look at this dead rodent I brought you
+-0.1360 (Moderately Catlike)
+> licks self aggressively
+-0.0940 (Moderately Catlike)
+> Brushing my hair this afternoon
+-0.0214 (Slightly Catlike)
+> Adding makeup
++0.0018 (Slightly Human)
+> Going to the racecourt
++0.0272 (Slightly Human)
+> Going to the barn to hunt
+-0.0606 (Moderately Catlike)
+> WHERE IS THE RED DOT
+-0.0247 (Slightly Catlike)
+> WHERE IS MY PHONE
+-0.0322 (Slightly Catlike)
+> hmm where is my car dude
+-0.0228 (Slightly Catlike)
+> where is my refridgerator
++0.0060 (Slightly Human)
+> Pet me
+-0.2295 (Strongly Catlike)
+> grr
++0.0317 (Slightly Human)
+> hiss
+-0.1208 (Moderately Catlike)
+> bark
+-0.1837 (Strongly Catlike)
+> oops
+-0.0301 (Slightly Catlike)
+> BIRD !!
+-0.1465 (Moderately Catlike)
+> LOOK ITS KEANU REEVES!
++0.0196 (Slightly Human)
+> purr purr purr BITE
+-0.2680 (Strongly Catlike)
