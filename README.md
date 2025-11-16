@@ -1,27 +1,19 @@
 # Dipole classifiers
-Fast, lightweight semantic classifiers from contrastive sentence pairs. Train a ~1KB vector on 20 synthetic examples, achieve 82% accuracy on IMDB (Sentiment) at 30k words/second. 
 
-This repo demonstrates a technique for creating semantic directions in embedding space from contrastive sentence pairs.
-It identifies vectors (e.g., sentiment, formality, urgency) which can be used for lightweight classification or analysis with other embeddings in the same space. 
+Train a ~1KB vector in 2 minutes on 20 synthetic examples, run prediction at ~30k words/second on RTX 3090 (embedding inference). Single dot product per classification on CPU. Achieves 82% accuracy on IMDB (Sentiment). 
 
-The benchmark results (see below) should be reproducible with this code.
-
+This repo demonstrates a technique for creating semantic directions in embedding space from contrastive sentence pairs. It identifies vectors (e.g., sentiment, formality, urgency) which can be used for lightweight classification or analysis with other embeddings in the same space. Read more about the [method](docs/method.md).
 
 ![Training and classification workflow demonstration](docs/train-and-classify-demo.gif)
-
+(Screenshot of training and using classifier)
 
 ### Benchmarks
 
-Tested against standard datasets with these results:
+Tested against these standard datasets:
 
 - **SST-2 (Sentiment)**: 84.3% accuracy
 - **IMDB (Sentiment)**: 82.3% accuracy  
 - **Pavlick Formality**: 0.61 correlation (r)
-
-All using ~1KB semantic vectors derived from 20-100 synthetic training pairs.
-Increasing number of training pairs to 500 did not improve accuracy in one experiment.
-
-**Speed**: ~30k words/second on RTX 3090 (embedding inference). Single dot product per classification on CPU.
 
 
 
