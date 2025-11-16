@@ -21,7 +21,7 @@ Tested against standard datasets with these results:
 All using ~1KB semantic vectors derived from 20-100 synthetic training pairs.
 Increasing number of training pairs to 500 did not improve accuracy in one experiment.
 
-**Speed**: ~30k words/second on RTX 3090 (embedding inference). Single dot product per classification runs on CPU.
+**Speed**: ~30k words/second on RTX 3090 (embedding inference). Single dot product per classification on CPU.
 
 
 
@@ -51,7 +51,7 @@ This requires access to an embedding server and an LLM API as well as Python3.10
 ### **Step 1: Clone & Setup Python Environment**
 ```bash
 git clone https://github.com/jojasadventure/dipole-classifiers
-cd your-repo
+cd dipole-classifiers
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -60,16 +60,16 @@ pip install -r requirements.txt
 ### **Step 2: Setup the Embedding Service**
 
 You can use an external API or deploy your own Hugging Face `text-embeddings-inference` docker container. Faster on GPU.
-Both the docker steps will download the embedding model (~1GB) and start the required inference server.
+Docker option will download the embedding model (~1GB) and start the required API server.
 
-Choose one of the following paths:
+**Choose one of the following paths:**
 
 - OPTION A: External API: Use your own embedding API like Jina: 
   - Copy config.yaml.template to config.yaml and set your api settings in there.
 
 - OPTION B: CPU embedding: 
   - Copy config.yaml.cpu to config.yaml
-  - Run the TEI docker for CPU command below (shutdown TEI with `docker stop tei-cpu`):
+  - Run the TEI docker for CPU command below:
 
 ```bash
 docker run -d -p 8080:80 --name tei-cpu \
@@ -79,7 +79,7 @@ docker run -d -p 8080:80 --name tei-cpu \
 
 - OPTION C: GPU embedding:
     - Edit the provided docker-compose.tei.yaml to set your GPU IMAGE_TAG
-    - Optionally rename to docker-compose.yml and run
+    - Optionally rename to docker-compose.yml and run with `docker compose up`
 
 
 
@@ -90,12 +90,12 @@ Continue editing the config.yaml and set up your LLM API details:
 
 
 
-### **Step 4: Train Your First Dimension Vector**
+### **Step 4: Train Dimension Vector**
 ```bash
-python run_pipeline.py --dimension "Formality: Formal vs Informal" --num-pairs 50 --validate-new
+python run_pipeline.py --dimension "Emotional Valence: Negative vs Positive" --num-pairs 50 --validate-new
 ```
 
-**Step 5: Use Your New Classifier!**
+**Step 5: Use New Classifier**
 The interactive tool will automatically discover the vector you just created.
 ```bash
 python scripts/classify.py
@@ -109,13 +109,13 @@ Once you have a vector, you can run the corresponding benchmark script. The requ
 #### **Example: SST-2 Sentiment Benchmark**
 ```bash
 python sst2-benchmark.py \
-  --vector results/Sentiment_Positive_vs_Negative/openaigpt-4o_50p_20240520-103000/dimension_vector.json
+  --vector results/Sentiment_Positive_vs_Negative/qwen3:4b_20p_20250520-103000/dimension_vector.json
 ```
 
 #### **Example: Pavlick Formality Benchmark**
 ```bash
 python pavlick-formality-benchmark.py \
-  --vector results/Formality_Formal_vs_Informal/openaigpt-4o_50p_20240520-103500/dimension_vector.json
+  --vector results/Formality_Formal_vs_Informal/qwen3:4b_20p_20250520-103500/dimension_vector.json
 ```
 
 
@@ -127,7 +127,7 @@ Write the config.yaml parameters with underscores:
 *   `llm_api_key`: **Required** for `google` and `openai`.
 *   `llm_api_url`: Optional override for `openai` (e.g., OpenRouter), **Required** for `ollama` (e.g., `http://localhost:11434/v1`).
 *   `llm_batch_size`: How many sentence pairs or samples to request in a single API call.
-*   `llm_model_name`: The specific model identifier (e.g., `gemini-1.5-pro-latest`).
+*   `llm_model_name`: The specific model identifier (e.g., `qwen3:4b`).
 *   `llm_temperature`, `llm_num_pairs`: Control the generation process.
 
 *   `embedding_api_url`: **Required.** The base URL of your embedding service (e.g., `http://localhost:8080`). The pipeline appends `/embed`.
@@ -138,6 +138,7 @@ Write the config.yaml parameters with underscores:
 
 If you want to run the above from terminal as arguments, please write with hyphens.
 Command-line arguments will always override the values in the file. The below arguments make most sense for direct use in CLI: 
+*   `dimension` Always state classifier in `Dimension: Pole A vs Pole B` format. 
 *   `prompt-file` Path to a custom prompt template to replace the default prompt.
 *   `prompt-extra-text "..."` Add text extra text to the built-in prompt
 *   `validate-sample`  Run in-sample validation on the pairs used to generate the vector.
@@ -233,7 +234,26 @@ results/
 ```
 
 
+## Benchmarking guide
 
+These benchmarks are available: SST2, IMDB (Sentiment), Pavlick Formality, tasksource/subjectivity
+Please consider the direction of Pole A **to** Pole B is hardcoded in the benchmarking scripts, so using a classifier with the poles swapped, may show reverse results in benchmarking. E.g. if you get negative correlation on the Pavlick benchmark, reverse Pole A and Pole B in the Formality classifier you trained.
+
+### **Step 1: Train**
+
+```bash
+python run_pipeline.py --dimension "Emotional Valence: Negative vs Positive" --num-pairs 20 --validate-new
+```
+
+#### **Step 2: Run Benchmark**
+```bash
+python sst2-benchmark.py \
+  --vector results/Sentiment_Positive_vs_Negative/mistral-small3.2:24b_20p_20250520-103000/dimension_vector.json
+```
+
+
+
+### **Step 1: Train a classifier for one of the scripts**
 
 
 ## Detailed Pipeline Workflow
