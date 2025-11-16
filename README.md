@@ -100,7 +100,7 @@ Once you have a vector, you can run the corresponding benchmark script. The requ
 
 #### **Example: SST-2 Sentiment Benchmark**
 ```bash
-python sst2-benchmark.py \
+python scripts/sst2-benchmark.py \
   --vector results/Sentiment_Positive_vs_Negative/qwen3:4b_20p_20250520-103000/dimension_vector.json
 ```
 
@@ -235,7 +235,7 @@ python run_pipeline.py --dimension "Emotional Valence: Negative vs Positive" --n
 #### **Step 2: Run Benchmark**
 
 ```bash
-python pavlick-formality-benchmark.py \
+python scripts/pavlick-formality-benchmark.py \
   --vector results/Formality_Formal_vs_Informal/qwen3:4b_20p_20250520-103500/dimension_vector.json
 ```
 
