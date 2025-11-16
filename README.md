@@ -314,6 +314,6 @@ To understand the impact of prompting a targeted experiment was run with a "Conf
 
 **Takeaways:**
 
-*   **Consistency is King:** The "Short & Consistent" prompt, despite its simplicity, produced a significantly better and more robust classifier. The clean, focused signal was more effective than the more complex prompt that tried to account for every nuance. The simpler prompt's vector generalized better, even to the edge cases it wasn't explicitly shown.
-*   **Initial Validation Can Be Misleading:** Testing against a randomly generated validation set can create an illusion of performance. A prompt might just get lucky with the set of examples it's tested against. **Using a fixed benchmark is better** for true, apples-to-apples comparisons between different approaches. (Obviously does not substitute real datasets.)
-*   **Hypothesis:** A few high-quality, highly parallel examples in your prompt are more effective than a large, varied set. Focus on providing the LLM with a strong, unambiguous core concept.
+*   The "Short & Consistent" prompt, despite its simplicity, produced a significantly better and more robust classifier. The clean, focused signal was more effective than the more complex prompt that tried to account for every nuance. The simpler prompt's vector generalized better, even to the edge cases it wasn't explicitly shown.
+*   Testing against a randomly generated validation set can create an illusion of performance. A prompt might just get lucky with the set of examples it's tested against. Using a fixed benchmark is better. (Obviously does not substitute real datasets.)
+*   A few high-quality, highly parallel examples are more effective than a large, varied set. Focus on providing the LLM with a strong, unambiguous core concept.
