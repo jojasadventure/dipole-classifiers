@@ -76,13 +76,11 @@ Testing with a "Confidence" classifier showed that prompt design significantly i
 - **Short & Consistent prompt** (4 parallel examples): 97.5% accuracy
 - **Long & Detailed prompt** (5 varied examples): 92.5% accuracy
 
-The simpler, more focused prompt produced a better classifier. Clean, parallel examples were more effective than complex prompts trying to cover edge cases.
-
-Testing against randomly generated validation sets can be misleading. A fixed benchmark is more reliable for comparing different approaches.
+The simpler, more focused prompt produced a better classifier. Clean, parallel examples were more effective than complex prompts trying to cover edge cases. Note: It was also discovered in this run that testing against randomly generated validation sets can be misleading, and a fixed benchmark is more reliable for comparing different approaches. A CLI parameter was added to the pipeline to always compare against same sample set.
 
 ## Limitations and Future Work
 
-This is not a replacement for fine-tuned transformers when maximum accuracy is needed. The trade-off is an accuracy penalty versus fine-tuned models, but with  fster inference and training on minimal synthetic data.
+This is not a replacement for fine-tuned transformers when maximum accuracy is needed. The trade-off is an accuracy penalty versus fine-tuned models, but with faster inference and training on minimal synthetic data.
 
 Future work could explore:
 - Orthogonalization of multiple semantic dimensions
