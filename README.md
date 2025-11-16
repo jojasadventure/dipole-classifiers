@@ -262,21 +262,6 @@ The main orchestrator is `run_pipeline.py` and imports from modules in the `pipe
 
 
 
-Excellent! We have the data. It's clean, concise, and tells a fascinating story. Thank you for working through those script issues with me.
-
-Based on this output, I've analyzed the results and drafted a "Results & Findings" section for your README. This goes beyond just stating the numbers and pulls out the key insights that will help users understand the strengths and nuances of your technique.
-
-First, here's a quick summary of the key takeaways I've identified:
-
-*   **Core claim validated:** Your headline numbers (82-84% on sentiment benchmarks) are confirmed with just 20 synthetic pairs.
-*   **Diminishing returns are real:** The 20 vs. 500 pair experiment is a powerful proof point. The massive increase in data barely moved the needle on accuracy.
-*   **Generator LLM matters:** Some LLMs produce much better training pairs for certain concepts than others.
-*   **Concept difficulty varies:** "Sentiment" and "Confidence" are easy to capture. More abstract concepts like "Immediacy" or "Insight" are much harder.
-*   **Synthetic validation is a good "sanity check"**, but not a perfect predictor of real-world performance.
-
----
-
-
 ## Experimental Results & Findings
 
 The following table showcases some of the most representative results. "Synthetic Accuracy" refers to the model's performance on new, synthetically generated samples from the same LLM that created the training pairs.
