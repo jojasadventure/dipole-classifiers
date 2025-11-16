@@ -87,13 +87,13 @@ Continue editing the config.yaml and set up your LLM API details:
 python run_pipeline.py --dimension "Emotional Valence: Negative vs Positive" --num-pairs 50 --validate-new
 ```
 
-**Step 5: Use New Classifier**
+### **Step 5: Use New Classifier**
 The interactive tool will automatically discover the vector you just created.
 ```bash
 python scripts/classify.py
 ```
 
-**Step 5: Benchmark a Classifier**
+### **Step 5: Benchmark a Classifier**
 
 Once you have a vector, you can run the corresponding benchmark script. The required `-v`/`--vector` argument is the path to your `dimension_vector.json` file in the results dir. 
 
@@ -104,11 +104,6 @@ python sst2-benchmark.py \
   --vector results/Sentiment_Positive_vs_Negative/qwen3:4b_20p_20250520-103000/dimension_vector.json
 ```
 
-#### **Example: Pavlick Formality Benchmark**
-```bash
-python pavlick-formality-benchmark.py \
-  --vector results/Formality_Formal_vs_Informal/qwen3:4b_20p_20250520-103500/dimension_vector.json
-```
 
 
 ## Settings in `config.yaml`
@@ -238,11 +233,11 @@ python run_pipeline.py --dimension "Emotional Valence: Negative vs Positive" --n
 ```
 
 #### **Step 2: Run Benchmark**
-```bash
-python sst2-benchmark.py \
-  --vector results/Sentiment_Positive_vs_Negative/mistral-small3.2:24b_20p_20250520-103000/dimension_vector.json
-```
 
+```bash
+python pavlick-formality-benchmark.py \
+  --vector results/Formality_Formal_vs_Informal/qwen3:4b_20p_20250520-103500/dimension_vector.json
+```
 
 
 ### **Step 1: Train a classifier for one of the scripts**
