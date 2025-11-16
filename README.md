@@ -41,7 +41,7 @@ This could be useful for:
 ### Sample outputs
 
 Example output from training runs here:
-![Sample outputs](docs/sample-output.md)
+![Sample outputs](docs/sample-output.txt)
 
 
 ## How to setup and run
