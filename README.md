@@ -31,7 +31,7 @@ Tested against these standard datasets:
 - These require no dataset to train.
 
 
-#### Which concepts map cleanly to a linear vector?
+### Which concepts map cleanly to a linear vector?
 
 Some stable vectors identified from experiments below. Most of these were trained on 20 synthetic sentence pairs without custom few-shot examples:
 
