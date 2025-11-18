@@ -41,11 +41,11 @@ Here's the cleaned up table without the use case column:
 | Dimension | Pole A | Pole B | Synthetic Acc. |
 | :--- | :--- | :--- | :---: |
 | **Joy** | Sadness | Joy | **100%** |
+| **Reason for visit** | Business | Pleasure | **100.00%** |
 | **Emotion** | Fear | Safety | **100%** |
 | **Consent** | Consensual | Nonconsensual | **100%** |
 | **Speed** | Slow | Fast | **100%** |
 | **Accord** | Dissonance | Harmony | **98%** |
-| **Reason for visit | Business | Pleasure | **100.00%** |
 | **Logic** | True | False | **100%** |
 | **Task** | To-Do | Done | **98%** |
 | **Condition** | Sick | Healthy | **98%** |
