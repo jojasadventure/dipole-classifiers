@@ -16,24 +16,51 @@ Tested against these standard datasets:
 - **Pavlick Formality**: 0.61 correlation (r)
 
 
+### What This Isn't
 
-### What This Is (And Isn't)
+- This repo contains code to reproduce amateur research. 
+- Classifiers need to be self-trained. 
+- Making a classifier requires opposing concepts. 
+- They are really single vectors used for classification. See below for experiments in finding stable vectors. 
+- The est. 80% accuracy means they are **not** a replacement for fine-tuned transformers. 
 
-This is **not** a replacement for fine-tuned transformers when you need maximum accuracy. 
+### When This Could Be Useful
 
-This could be useful for:
-- Extremely fast inference
-- Zero-shot classification without labeled training data
-- Custom dimensions without training datasets ("insightful vs confused", "ephemeral vs important")
-- Rapid prototyping and experimentation
-- Edge deployment
+- The vectors used to classify text **are** an estimated 30x faster than transformers since you only have to make embeddings. If you **have embeddings already** using this would beat a normal transformer classifier by several orders of magnitude! As it's just a dot product on CPU. 
 
-**Trade-off**: Accuracy penalty vs fine-tuned models, but 30x faster and trained in minutes on synthetic data vs hours on huge labeled datasets.
+- This could be useful for: Extremely fast inference / Classification without labeled training  data / Custom dimensions without datasets / Experimentation / Edge deployment
 
-### Sample outputs
+- These require no dataset to train.
 
-Example output from training runs here:
-![Sample outputs](docs/sample-output.txt)
+
+#### Which concepts map cleanly to a linear vector?
+
+Some stable vectors identified from experiments below. Most of these were trained on 20 synthetic sentence pairs without custom few-shot examples.
+Here's the cleaned up table without the use case column:
+
+| Dimension | Pole A | Pole B | Synthetic Acc. |
+| :--- | :--- | :--- | :---: |
+| **Joy** | Sadness | Joy | **100%** |
+| **Emotion** | Fear | Safety | **100%** |
+| **Consent** | Consensual | Nonconsensual | **100%** |
+| **Speed** | Slow | Fast | **100%** |
+| **Accord** | Dissonance | Harmony | **98%** |
+| **Reason for visit | Business | Pleasure | **100.00%** |
+| **Logic** | True | False | **100%** |
+| **Task** | To-Do | Done | **98%** |
+| **Condition** | Sick | Healthy | **98%** |
+| **Morals** | Good | Evil | **98%** |
+| **Action** | Create | Destroy | **98%** |
+| **State** | In control | Out of control | **98%** |
+| **Existence** | Life | Death | **93%** |
+| **Conflict** | Attack | Defend | **90%** |
+| **Temperature** | Hot | Cold | **90%** |
+
+> [List of experimental results](docs/experimental_results.md)
+
+> [Sample outputs](docs/sample-output.txt) from training runs
+
+
 
 
 ## How to setup and run

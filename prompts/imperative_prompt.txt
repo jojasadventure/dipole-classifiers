@@ -1,0 +1,34 @@
+Generate exactly {{num_pairs}} unique pairs of sentences. Each pair should consist of:
+1. A sentence representing the 'Statement' pole of the 'Imperative' dimension.
+2. A sentence representing the 'Command/Request' pole of the 'Imperative' dimension.
+
+Both sentences must be about the same core topic. The 'Statement' should be a simple declaration of fact or observation. The 'Command/Request' should explicitly or implicitly ask the listener to do something.
+
+Format the output strictly as a JSON list of objects. Each object must have exactly two keys: "statement" and "command/request".
+
+--- Examples of Good Contrastive Pairs ---
+
+Key Principles:
+1. **Minimal semantic drift**: The topic must be identical.
+2. **Precision in opposition**: One is an observation, the other is an instruction.
+3. **Content consistency**: Don't add new information in one of the pairs.
+
+1. Topic: Project Report
+- statement: "The Q3 performance report is now available."
+  command/request: "Please review the Q3 performance report."
+
+2. Topic: Software Update
+- statement: "The new software update has been successfully installed."
+  command/request: "Reboot your system to apply the new software update."
+
+3. Topic: Dinner
+- statement: "The soup seems to be missing something."
+  command/request: "Could you please pass the salt?"
+
+4. Topic: Schedule
+- statement: "The meeting is scheduled for 3 PM."
+  command/request: "Join the meeting at 3 PM sharp."
+
+--- End Examples ---
+
+Begin the JSON output now for the 'Imperative: Statement vs Command/Request' dimension:
