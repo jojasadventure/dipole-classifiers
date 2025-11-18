@@ -13,6 +13,18 @@ A vector's strength appears to be determined by:
 - Exemplars: If an abstract concept, can it be represented by concrete, token-level examples? 
 
 
+## Note on Synthetic Data
+
+In this early version, each run generates synthetic data from the same model which generated the training pairs for the vector. Whilst this is limited as a validation method, it became apparent that the strongest and most stable vectors "show themselves" by being 100% across multiple runs of regenerating and using different sample data. 
+
+## Variables
+
+Prompting, few-shot examples, the LLM used, and the embedding generator used all influence the final result. A vector may work within it's model's examples but fail on IMDB's more nuanced expressions - use the provided benchmarks to compare against real data.
+
+
+## Table
+
+(Note: Trained with nomic-embed-text-v1_5)
 | Tier | Dimension | Poles (A vs. B) | Synthetic Acc. | # Pairs | LLM Generator | Notes |
 | :--- | :--- | :--- | :---: | :---: | :--- | :--- |
 | **---** | **Tier 1: (100%)** | **---** | **---** | **---** | **---** | **---** |
