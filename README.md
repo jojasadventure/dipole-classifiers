@@ -33,7 +33,7 @@ Tested against these standard datasets:
 
 ### Which concepts map cleanly to a linear vector?
 
-Some stable vectors identified from experiments below. Most of these were trained on 20 synthetic sentence pairs without custom few-shot examples:
+Some stable vectors identified from experiments below. Most of these were trained on 20 synthetic sentence pairs without custom few-shot examples. Synthetic accuracy refers to validation on synthetic new samples from the same model; it gives a hint of how stable the vector is and how well it will perform.
 
 | Dimension | Pole A | Pole B | Synthetic Acc. |
 | :--- | :--- | :--- | :---: |
