@@ -38,7 +38,7 @@ Some stable vectors identified from experiments below. Most of these were traine
 | Dimension | Pole A | Pole B | Synthetic Acc. |
 | :--- | :--- | :--- | :---: |
 | **Joy** | Sadness | Joy | **100%** |
-| **Reason for visit** | Business | Pleasure | **100.00%** |
+| **Reason for visit** | Business | Pleasure | **100%** |
 | **Emotion** | Fear | Safety | **100%** |
 | **Consent** | Consensual | Nonconsensual | **100%** |
 | **Speed** | Slow | Fast | **100%** |
