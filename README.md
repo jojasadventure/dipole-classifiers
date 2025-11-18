@@ -53,7 +53,7 @@ Some stable vectors identified from experiments below. Most of these were traine
 | **Conflict** | Attack | Defend | **90%** |
 | **Temperature** | Hot | Cold | **90%** |
 
-> [List of experimental results](docs/experimental_results.md)
+> [List of experimental results](docs/experimental-results.md)
 
 > [Sample outputs](docs/sample-output.txt) from training runs
 
