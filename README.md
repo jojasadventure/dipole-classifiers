@@ -33,8 +33,7 @@ Tested against these standard datasets:
 
 #### Which concepts map cleanly to a linear vector?
 
-Some stable vectors identified from experiments below. Most of these were trained on 20 synthetic sentence pairs without custom few-shot examples.
-Here's the cleaned up table without the use case column:
+Some stable vectors identified from experiments below. Most of these were trained on 20 synthetic sentence pairs without custom few-shot examples:
 
 | Dimension | Pole A | Pole B | Synthetic Acc. |
 | :--- | :--- | :--- | :---: |
