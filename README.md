@@ -1,7 +1,5 @@
 # Dipole classifiers
 
-Train a ~1KB vector in 2 minutes on 20 synthetic examples, run prediction at ~30k words/second on RTX 3090 (embedding inference). Single dot product per classification on CPU. Achieves 82% accuracy on IMDB (Sentiment). 
-
 This repo demonstrates a technique for creating semantic directions in embedding space from contrastive sentence pairs. It identifies vectors (e.g., sentiment, formality, urgency) which can be used for lightweight classification or analysis with other embeddings in the same space. Read more about the [method](docs/method.md).
 
 ![Training and classification workflow demonstration](docs/train-and-classify-demo.gif)
