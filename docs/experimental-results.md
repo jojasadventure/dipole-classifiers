@@ -1,7 +1,17 @@
+# Experimental Classifiers (Tiered by Synthetic Accuracy)
 
-### Experimental Classifiers (Tiered by Synthetic Accuracy)
+This tiered view shows which concepts were clearly defined by the LLMs and which were more ambiguous or difficult to represent as a simple vector. The experiment reflects both the bias of the generating LLM as well as that of the embedding model.
 
-This tiered view shows which concepts were clearly defined by the LLMs and which were more ambiguous or difficult to represent as a simple vector.
+A vector's strength appears to be determined by:
+
+- Primal Nature: Is it core to physical, biological, or social experience?
+- Symmetry & Extremity: Are the poles equal, opposite, and far apart? 
+- Absoluteness: Does it describe an inherent state, not a relative comparison?
+- Simplicity: Is it a simple core concept, or a high-level abstraction?
+- Purity: Is it unambiguous, or does it suffer from metaphorical/homonymous contamination?
+- Alignment: Does it require an uncensored model to represent fully?
+- Exemplars: If an abstract concept, can it be represented by concrete, token-level examples? 
+
 
 | Tier | Dimension | Poles (A vs. B) | Synthetic Acc. | # Pairs | LLM Generator | Notes |
 | :--- | :--- | :--- | :---: | :---: | :--- | :--- |
@@ -13,7 +23,7 @@ This tiered view shows which concepts were clearly defined by the LLMs and which
 | 1 | Energy | Kinetic vs. Static | 100.00% | 20 | `gemma-3-12b-it` | |
 | 1 | Speed | Fast vs. Slow | 100.00% | 20 | `gemma-3-12b-it` | |
 | 1 | Light | Dark vs. Light | 100.00% | 20 | `gemma-3-12b-it` | |
-| 1 | Logic | True vs. False | 100.00% | 20 | `gemma-3-12b-it` | Very strong separation |
+| 1 | Logic | True vs. False | 100.00% | 20 | `gemma-3-12b-it` | |
 | 1 | Object | Broken vs. Whole | 100.00% | 20 | `gemma-3-12b-it` | |
 | 1 | Outcome | Success vs. Failure | 100.00% | 20 | `gemma-3-12b-it` | |
 | 1 | Phase | Solid vs. Gas | 100.00% | 20 | `gemma-3-12b-it` | |
@@ -27,7 +37,7 @@ This tiered view shows which concepts were clearly defined by the LLMs and which
 | 2 | Emotion | Confident vs. Anxious | 97.50% | 20 | `gemma-3-12b-it` | |
 | 2 | Interest | Boring vs. Exciting | 97.50% | 20 | `gemma-3-12b-it` | |
 | 2 | Meaning | Meaningless vs. Meaningful | 97.50% | 20 | `gemma-3-12b-it` | |
-| 2 | Morals | Good vs. Evil | 97.50% | 20 | `gemma-3-12b-it` | User: "oooh so dicey" |
+| 2 | Morals | Good vs. Evil | 97.50% | 20 | `gemma-3-12b-it` |  |
 | 2 | Property | Sharp vs. Dull | 97.50% | 20 | `gemma-3-12b-it` | |
 | 2 | State | In control vs. Out of control | 97.50% | 20 | `gemma3:4b` | |
 | 2 | Task | To-Do vs. Done | 97.50% | 20 | `gemma-3-12b-it` | |
@@ -43,7 +53,7 @@ This tiered view shows which concepts were clearly defined by the LLMs and which
 | 2 | Existence | Life vs. Death | 92.50% | 20 | `gemma-3-12b-it` | |
 | 2 | State | Resolved vs. Unresolved | 92.50% | 20 | `gemma-3-12b-it` | |
 | 2 | State | War vs. Peace | 90.91% | 25 | `Phi-lthy4_GGUF` | |
-| 2 | Content | Depravity vs. Family-Friendly | 90.48% | 24 | `Phi-lthy4_GGUF` | User: "Ew ew ew ew" |
+| 2 | Content | Depravity vs. Family-Friendly | 90.48% | 24 | `Phi-lthy4_GGUF` | |
 | 2 | Conflict | Attack vs. Defend | 90.00% | 20 | `gemma-3-12b-it` | |
 | 2 | Handling | Brutality vs. Tenderness | 90.00% | 20 | `gemma3:4b` | |
 | 2 | Mass | Heavy vs. Light | 90.00% | 20 | `gemma-3-12b-it` | |
