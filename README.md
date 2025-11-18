@@ -2,9 +2,6 @@
 
 This repo demonstrates a technique for creating semantic directions in embedding space from contrastive sentence pairs. It identifies vectors (e.g., sentiment, formality, urgency) which can be used for lightweight classification or analysis with other embeddings in the same space. Read more about the [method](docs/method.md).
 
-![Training and classification workflow demonstration](docs/train-and-classify-demo.gif)
-(Screenshot of training and using classifier)
-
 ### Benchmarks
 
 Tested against these standard datasets:
