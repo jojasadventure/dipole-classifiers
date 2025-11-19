@@ -218,7 +218,11 @@ python run_pipeline.py --dimension "Sentiment: Positive vs Negative" --validate-
 
 # Generate and run in-sample validation
 python run_pipeline.py --dimension "Urgency: Urgent vs Non-Urgent" --validate-in-sample
+```
 
+#### Scoring on datasets from Huggingface 
+
+```bash
 # Download a HF dataset
 python scripts/download_data.py dair-ai/emotion --local-name datasets/dair-ai_emotion
 
@@ -227,7 +231,6 @@ python scripts/cache_embeddings.py --dataset ./datasets/dair-ai_emotion --column
 
 # Run vector on pre-embedded dataset
 python scripts/investigate.py   --vector results/Emotion_Postive_Negative/model-name/dimension_vector.json   --dataset ./dair-ai_emotion-nomic.jsonl   --column "text" --show 20 --output-csv dair-ai_dataset-scored.csv --include-cols label --threshold -1.0
-
 ```
 
 
