@@ -21,7 +21,7 @@ Tested against these standard datasets:
 
 ### When This Could Be Useful
 
-- The vectors used to classify text **are** an estimated 30x faster than transformers since you only have to make embeddings. If you **have embeddings already** this method (dot product on CPU) beats a normal transformer classifier by orders of magnitude.
+- The vectors used to classify text **are** an estimated 30x faster than transformers since you only have to make embeddings. If you **have embeddings already** this method (dot product on CPU) is roughly ~1000x faster.
 
 - This could be useful for: Extremely fast inference / Classification without labeled training  data / Custom dimensions without datasets / Experimentation / Edge deployment
 
