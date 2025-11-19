@@ -274,8 +274,6 @@ python scripts/pavlick-formality-benchmark.py \
 ```
 
 
-### **Step 1: Train a classifier for one of the scripts**
-
 
 ## Detailed Pipeline Workflow
 
